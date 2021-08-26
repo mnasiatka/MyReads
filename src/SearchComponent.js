@@ -49,7 +49,7 @@ export default class SearchComponent extends Component {
             this.searchForBooks(searchTerm)
         }
         else {
-            this.setState({ searchedBooks: [] })
+            this.setState({ searchedBooks: [], error: false })
         }
     }
 
