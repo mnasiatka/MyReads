@@ -3,6 +3,7 @@ import './App.css'
 import { Route } from 'react-router-dom'
 import SearchComponent from './SearchComponent'
 import MyShelfComponent from './MyShelfComponent'
+import { getBookImage } from './constants.js';
 import { get, update, getAll } from './BooksAPI.js'
 
 class BooksApp extends React.Component {
@@ -21,7 +22,7 @@ class BooksApp extends React.Component {
         return {
           books: prevState.books.concat({
             id: book.id,
-            thumbnail: book.imageLinks.thumbnail,
+            thumbnail: getBookImage(book),
             title: book.title,
             authors: book.authors && book.authors.join(', '),
             shelfType
@@ -36,7 +37,7 @@ class BooksApp extends React.Component {
       this.setState({
         books: books.map((book) => ({
           id: book.id,
-          thumbnail: book.imageLinks.thumbnail,
+          thumbnail: getBookImage(book),
           title: book.title,
           authors: book.authors && book.authors.join(', '),
           shelfType: book.shelf

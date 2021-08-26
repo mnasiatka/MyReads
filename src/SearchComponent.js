@@ -1,8 +1,9 @@
 ﻿import React,  { Component } from "react";
-import {Link} from 'react-router-dom';
-import {search} from './BooksAPI.js'
+import { Link } from 'react-router-dom';
+import { search } from './BooksAPI.js'
 import BookItemComponent from "./BookItemComponent.js";
 import { BookShelfStatus } from "./enums.js";
+import { getBookImage } from './constants.js';
 import * as _ from 'lodash'
 
 export default class SearchComponent extends Component {
@@ -20,7 +21,7 @@ export default class SearchComponent extends Component {
     searchForBooks = async (searchTerm) => {
         await search(searchTerm).then((res) => {
             if (res.error) {
-                this.setState({ error: res.error, searchedBooks: []});
+                this.setState({ error: res.error, searchedBooks: [] });
                 return;
             }
 
@@ -29,7 +30,7 @@ export default class SearchComponent extends Component {
                     var book = this.props.books.find(book => book.id === x.id);
                     return {
                         id: x.id,
-                        thumbnail: x.imageLinks.thumbnail,
+                        thumbnail: getBookImage(x),
                         title: x.title,
                         authors: x.authors && x.authors.join(', '),
                         shelfType: book !== undefined ? book.shelfType : BookShelfStatus.None
@@ -44,9 +45,11 @@ export default class SearchComponent extends Component {
         const searchTerm = e.target.value;
         this.setState({ searchTerm });
 
-        if (searchTerm.length >= 2) {
-            // call api
+        if (searchTerm.length) {
             this.searchForBooks(searchTerm)
+        }
+        else {
+            this.setState({ searchedBooks: [] })
         }
     }
 

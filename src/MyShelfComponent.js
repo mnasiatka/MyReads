@@ -1,7 +1,7 @@
 ﻿import React from "react";
 import {  Link } from 'react-router-dom'
 import ShelfComponent from './ShelfComponent'
-import {ShelfType} from './enums.js'
+import { ShelfType } from './enums.js'
 
 export default function MyShelfComponent(props) {
     return (

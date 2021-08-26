@@ -1,6 +1,6 @@
 ﻿import React from "react";
 import BookItemComponent from './BookItemComponent'
-import {  ShelfTypeString } from "./enums.js";
+import { ShelfTypeString } from "./enums.js";
 
 
 export default function ShelfComponent(props) {
